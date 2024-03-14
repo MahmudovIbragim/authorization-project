@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useGetProductQuery } from "../../../redux/api/product";
 import Modal from "../../forms/modal/Modal";
+import scss from "./Home.module.scss";
+import HomeForm from "../../forms/homePageForm/HomeForm";
+import { useGetProductQuery } from "../../../redux/api/productApi/product";
 
 interface TypeHome {}
 
@@ -17,33 +19,38 @@ const Home: FC<TypeHome> = () => {
     }
   }, [navigate]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("isAuth");
-    navigate("login");
-  };
-
   const handleModal = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div>
-      Home
-      <button onClick={logout}>Выйти</button>
-      <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
-      <div>
-        {products.map((item) => (
-          <div key={item.id}>
-            <h1>{item.productName}</h1>
-            <h3>{item.quantity}</h3>
-            <img src={item.PhotoUrl} alt="" />
-            <p>{item.price}</p>
+    <div className={scss.HomePage}>
+      <div className="container">
+        <div className={scss.Content}>
+          <div className={scss.add_btn}>
+            <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
           </div>
-        ))}
+          <div>
+            {products.map((item) => (
+              <div key={item.id}>
+                <h1>{item.productName}</h1>
+                <h3>{item.quantity}</h3>
+                <img src={item.PhotoUrl} alt="" />
+                <p>{item.price}</p>
+              </div>
+            ))}
+          </div>
+          <Modal isOpen={isOpen} onClose={handleModal}>
+            <div className={scss.modalContent}>
+              <div className={scss.modal_navBar}>
+                <p>Добавить новую позицию</p>
+              </div>
+              <div className={scss.froms}>
+                <HomeForm/>
+              </div>
+            </div>
+          </Modal>
+        </div>
       </div>
-      <Modal isOpen={isOpen} onClose={handleModal}>
-        bye bye my Girl
-      </Modal>
     </div>
   );
 };

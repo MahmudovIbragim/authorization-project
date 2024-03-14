@@ -1,12 +1,9 @@
-import MainRoutes from "./components/route/MainRoutes";
-import ReduxProvider from "./redux/ReduxProvider";
+import Layout from "./components/layuot/Layout";
 
 const App = () => {
   return (
     <>
-      <ReduxProvider>
-        <MainRoutes />
-      </ReduxProvider>
+      <Layout />
     </>
   );
 };

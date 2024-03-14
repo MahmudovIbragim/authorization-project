@@ -2,10 +2,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
 // import Input from "../../ui/customInput/CustomInput";
-import { useCreateUsersMutation } from "../../../redux/api/UsersApi";
 import { Field, Form, Formik } from "formik";
 import { registerValidate } from "../../../utils/validations/registrationValidate";
 import scss from "./Register.module.scss";
+import { useCreateUsersMutation } from "../../../redux/api/usersApi/UserApi";
 
 const RegisterForm = () => {
   const [createUser] = useCreateUsersMutation();
