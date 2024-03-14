@@ -6,13 +6,15 @@ const api = index.injectEndpoints({
       query: () => ({
         url: "products",
       }),
+      providesTags:['link']
     }),
     createProduct: builder.mutation({
-      query: (body) => ({
+      query: (body) => ({        
         url: "products",
         method: "POST",
         body: body,
       }),
+      invalidatesTags:['link']
     }),
   }),
 });

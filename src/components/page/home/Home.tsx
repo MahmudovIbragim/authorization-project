@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Modal from "../../ui/modal/Modal";
 import scss from "./Home.module.scss";
-import HomeForm from "./homePageForm/HomeForm";
+import HomeForm from "./Form/Form";
 import { useGetProductQuery } from "../../../redux/api/product/product";
 
 interface TypeHome {}

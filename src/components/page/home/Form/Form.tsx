@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import Button, { ButtonProps } from "../../../ui/customButton/CustomButton";
+import scss from "./Style.module.scss";
 import Input from "../../../ui/customInput/CustomInput";
 import { useCreateProductMutation } from "../../../../redux/api/product/product";
 
@@ -9,7 +10,7 @@ const HomeForm = () => {
     type: "submit",
     variant: "primary",
     color: "blue",
-    width: "300px",
+    width: "315px",
   };
 
   const formik = useFormik({
@@ -29,12 +30,12 @@ const HomeForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className={scss.Form} onSubmit={formik.handleSubmit}>
       <Input
         id="productName"
         type="productName"
-        label="productName"
-        placeholder="productName"
+        label="Product Name"
+        placeholder="Product Name"
         value={formik.values.productName}
         onChange={formik.handleChange}
         width="300px"
@@ -42,8 +43,8 @@ const HomeForm = () => {
       <Input
         id="price"
         type="price"
-        label="price"
-        placeholder="price"
+        label="Price"
+        placeholder="Price"
         value={formik.values.price}
         onChange={formik.handleChange}
         width="300px"
@@ -51,8 +52,8 @@ const HomeForm = () => {
       <Input
         id="quantity"
         type="quantity"
-        label="quantity"
-        placeholder="quantity"
+        label="Quantity"
+        placeholder="Quantity"
         value={formik.values.quantity}
         onChange={formik.handleChange}
         width="300px"
@@ -60,8 +61,8 @@ const HomeForm = () => {
       <Input
         id="PhotoUrl"
         type="PhotoUrl"
-        label="PhotoUrl"
-        placeholder="PhotoUrl"
+        label="IMG"
+        placeholder="IMG"
         value={formik.values.PhotoUrl}
         onChange={formik.handleChange}
         width="300px"
