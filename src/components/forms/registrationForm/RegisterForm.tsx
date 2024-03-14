@@ -1,39 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
-import Input from "../../ui/customInput/CustomInput";
-import { useState } from "react";
+// import Input from "../../ui/customInput/CustomInput";
 import { useCreateUsersMutation } from "../../../redux/api/UsersApi";
+import { Field, Form, Formik } from "formik";
+import { registerValidate } from "../../../utils/validations/registrationValidate";
+import scss from './Register.module.scss'
 
 const RegisterForm = () => {
-  const [createUser] = useCreateUsersMutation()
-  const navigate = useNavigate()
+  const [createUser] = useCreateUsersMutation();
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
-
-  const handleChangeEmail = (value: string) => {
-    setEmail(value);
-  };
-  const handleChangePassword = (value: string) => {
-    setPassword(value);
-  };
-
-  const handleChangeUserName = (value: string) => {
-    setUserName(value);
-  };
-
-  const handleAddUserSubmit = async(event:React.FormEvent <HTMLFormElement>) => {
-    event.preventDefault()
-    const result = await createUser({email, userName, password})
-    if(result){
-      setEmail('')
-      setPassword("")
-      setUserName('')
-      navigate('/login')
+  const handleAddUserSubmit = async (values: any) => {
+    const { userName, email, password } = values;
+    const result = await createUser({ email, userName, password });
+    if (result) {
+      navigate("/login");
     }
-
-  }
+  };
 
   const loginButtonProps: ButtonProps = {
     type: "submit",
@@ -42,39 +26,63 @@ const RegisterForm = () => {
     width: "300px",
   };
   return (
-    <>
-      <form onSubmit={handleAddUserSubmit}>
-        <h2>Регистрация</h2>
-        <Input
-          type="email"
-          label="Email"
-          placeholder="@email"
-          value={email}
-          onChange={handleChangeEmail}
-          width="300px"
-        />
-        <Input
-          type="text"
-          label="Имя Пользвателя"
-          placeholder="Имя Пользвотеля"
-          value={userName}
-          onChange={handleChangeUserName}
-          width="300px"
-        />
-        <Input
-          type="password"
-          label="Пароль"
-          placeholder=" Введите пароль"
-          value={password}
-          onChange={handleChangePassword}
-          width="300px"
-        />
-        <Link to={"/login"}>У меня есть аккаунт, войти</Link>
-        <div>
-          <Button {...loginButtonProps} >Зарегестрироватся</Button>
-        </div>
-      </form>
-    </>
+    <div className={scss.Register}>
+      <Formik
+        initialValues={{
+          userName: "",
+          email: "",
+          password: "",
+        }}
+        onSubmit={handleAddUserSubmit}
+        validationSchema={registerValidate}
+      >
+        {({ errors, touched }) => (
+          <div className={scss.Content}>
+            <Form>
+              <label htmlFor="email">Email</label>
+              <Field id="email" name="email" type="email" placeholder="Email" />
+              {touched.email && errors.email ? (
+                <>
+                  <h2 style={{ color: "red", margin: "0px" }}>
+                    {errors.email}
+                  </h2>
+                </>
+              ) : null}
+              <label htmlFor="userName">UserName</label>
+              <Field
+                id="userName"
+                name="userName"
+                type="userName"
+                placeholder="Имя Пользвотеля"
+              />
+              {touched.userName && errors.userName ? (
+                <>
+                  <h2 style={{ color: "red", margin: "0px" }}>
+                    {errors.userName}
+                  </h2>
+                </>
+              ) : null}
+              <label htmlFor="password">Password</label>
+              <Field
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Пароль"
+              />
+              {touched.password && errors.password ? (
+                <>
+                  <h2 style={{ color: "red", margin: "0px" }}>
+                    {errors.password}
+                  </h2>
+                </>
+              ) : null}
+              <Link to={"/login"}>У меня есть аккаунт, войти</Link>
+              <Button {...loginButtonProps}>Зарегестрироватся</Button>
+            </Form>
+          </div>
+        )}
+      </Formik>
+    </div>
   );
 };
 

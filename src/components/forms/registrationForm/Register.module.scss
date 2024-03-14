@@ -1,0 +1,23 @@
+.Register {
+  .Content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      label {
+        font-size: 18px;
+      }
+      input {
+        font-size: 14px;
+        padding: 8px 8px 8px 15px;
+      }
+      button {
+        padding: 10px 0px;
+      }
+    }
+  }
+}

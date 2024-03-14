@@ -1,9 +1,9 @@
-import Input from "../../ui/customInput/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
+import Input from "../../ui/customInput/CustomInput";
 import { useLoginMutation } from "../../../redux/api/loginApi";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { loginvalidation } from "../../../utils/validations/loginValidations";
 const LoginForm = () => {
   const [login] = useLoginMutation();
   const navigate = useNavigate();
@@ -20,12 +20,7 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Не корректный email")
-        .required("Заполните поле"),
-      password: Yup.string().required("Напишите Пароль"),
-    }),
+    validationSchema: loginvalidation,
     onSubmit: async (values) => {
       const result = await login({
         email: values.email,
