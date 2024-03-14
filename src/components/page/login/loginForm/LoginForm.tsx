@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
-import Input from "../../ui/customInput/CustomInput";
-import { useLoginMutation } from "../../../redux/api/loginApi";
+import Button, { ButtonProps } from "../../../ui/customButton/CustomButton";
+import Input from "../../../ui/customInput/CustomInput";
+import { useLoginMutation } from "../../../../redux/api/login";
 import { useFormik } from "formik";
-import { loginvalidation } from "../../../utils/validations/loginValidations";
+import { loginvalidation } from "../../../../utils/validations/loginValidations";
 const LoginForm = () => {
   const [login] = useLoginMutation();
   const navigate = useNavigate();

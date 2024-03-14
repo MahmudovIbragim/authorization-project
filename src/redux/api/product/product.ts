@@ -5,7 +5,6 @@ const api = index.injectEndpoints({
     getProduct: builder.query<Products[], void>({
       query: () => ({
         url: "products",
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }),
     }),
     createProduct: builder.mutation({

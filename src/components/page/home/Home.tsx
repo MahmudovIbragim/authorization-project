@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import Modal from "../../forms/modal/Modal";
+import Modal from "../../ui/modal/Modal";
 import scss from "./Home.module.scss";
-import HomeForm from "../../forms/homePageForm/HomeForm";
-import { useGetProductQuery } from "../../../redux/api/productApi/product";
+import HomeForm from "./homePageForm/HomeForm";
+import { useGetProductQuery } from "../../../redux/api/product/product";
 
 interface TypeHome {}
 
@@ -45,7 +45,7 @@ const Home: FC<TypeHome> = () => {
                 <p>Добавить новую позицию</p>
               </div>
               <div className={scss.froms}>
-                <HomeForm/>
+                <HomeForm />
               </div>
             </div>
           </Modal>

@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
-import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
-import Input from "../../ui/customInput/CustomInput";
-import { useCreateProductMutation } from "../../../redux/api/productApi/product";
+import Button, { ButtonProps } from "../../../ui/customButton/CustomButton";
+import Input from "../../../ui/customInput/CustomInput";
+import { useCreateProductMutation } from "../../../../redux/api/product/product";
 
 const HomeForm = () => {
   const [createProduct] = useCreateProductMutation();

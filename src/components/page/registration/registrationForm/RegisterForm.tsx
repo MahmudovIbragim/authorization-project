@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from "react-router-dom";
-import Button, { ButtonProps } from "../../ui/customButton/CustomButton";
+import Button, { ButtonProps } from "../../../ui/customButton/CustomButton";
 // import Input from "../../ui/customInput/CustomInput";
 import { Field, Form, Formik } from "formik";
-import { registerValidate } from "../../../utils/validations/registrationValidate";
+import { registerValidate } from "../../../../utils/validations/registrationValidate";
 import scss from "./Register.module.scss";
-import { useCreateUsersMutation } from "../../../redux/api/usersApi/UserApi";
+import { useCreateUsersMutation } from "../../../../redux/api/users/users";
 
 const RegisterForm = () => {
   const [createUser] = useCreateUsersMutation();
   const navigate = useNavigate();
-
   const handleAddUserSubmit = async (values: any) => {
     const { userName, email, password } = values;
-
     const result = await createUser({ userName, email, password });
     if (result) {
       navigate("/login");
