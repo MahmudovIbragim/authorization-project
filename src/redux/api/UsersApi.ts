@@ -30,12 +30,10 @@ export const usersApi = createApi({
       query: (body) => ({
         url: "users",
         method: "POST",
-        body: body,
+        body: body
       }),
     }),
   }),
 });
 
 export const { useCreateUsersMutation, useGetUsersQuery } = usersApi;
-
-
