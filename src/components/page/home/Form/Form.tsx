@@ -18,22 +18,23 @@ const HomeForm = () => {
       productName: "",
       price: "",
       quantity: "",
-      PhotoUrl: "",
+      photoUrl: "",
     },
     onSubmit: async (values) => {
-      await createProduct({
+      const newData = {
         productName: values.productName,
         price: values.price,
         quantity: values.quantity,
-        PhotoUrl: values.PhotoUrl,
-      });
+        photoUrl: values.photoUrl,
+      };
+      await createProduct(newData);
     },
   });
   return (
     <form className={scss.Form} onSubmit={formik.handleSubmit}>
       <Input
         id="productName"
-        type="productName"
+        type="text"
         label="Product Name"
         placeholder="Product Name"
         value={formik.values.productName}
@@ -42,7 +43,7 @@ const HomeForm = () => {
       />
       <Input
         id="price"
-        type="price"
+        type="text"
         label="Price"
         placeholder="Price"
         value={formik.values.price}
@@ -51,7 +52,7 @@ const HomeForm = () => {
       />
       <Input
         id="quantity"
-        type="quantity"
+        type="text"
         label="Quantity"
         placeholder="Quantity"
         value={formik.values.quantity}
@@ -59,11 +60,11 @@ const HomeForm = () => {
         width="300px"
       />
       <Input
-        id="PhotoUrl"
-        type="PhotoUrl"
+        id="photoUrl"
+        type="text"
         label="IMG"
         placeholder="IMG"
-        value={formik.values.PhotoUrl}
+        value={formik.values.photoUrl}
         onChange={formik.handleChange}
         width="300px"
       />

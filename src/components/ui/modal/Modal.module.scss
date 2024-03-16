@@ -14,13 +14,27 @@
     max-width: 500px;
     min-height: 500px;
     width: 100%;
-    background-color: rgb(63, 62, 62);
+    background-color: #f3f3f7;
     padding: 20px;
     border-radius: 5px;
   }
 }
-.modalClose {
-  position: absolute;
-  top: 10%;
-  right: 10px;
+.closeBtn {
+  position: relative;
+  .modalClose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 2px 2px 5px 2px rgb(138, 138, 138);
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: 370px;
+    img {
+      width: 15px;
+    }
+  }
 }

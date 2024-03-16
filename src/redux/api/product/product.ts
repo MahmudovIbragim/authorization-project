@@ -2,19 +2,20 @@ import { api as index } from "..";
 
 const api = index.injectEndpoints({
   endpoints: (builder) => ({
-    getProduct: builder.query<Products[], void>({
+    getProduct: builder.query<GetProductRequest, GetProductResponse>({
       query: () => ({
         url: "products",
+        method: "GET",
       }),
-      providesTags:['link']
+      providesTags: ["product"],
     }),
-    createProduct: builder.mutation({
-      query: (body) => ({        
+    createProduct: builder.mutation<PostProductResponse, PostProductRequest>({
+      query: (newData) => ({
         url: "products",
         method: "POST",
-        body: body,
+        body: newData,
       }),
-      invalidatesTags:['link']
+      invalidatesTags: ["product"],
     }),
   }),
 });

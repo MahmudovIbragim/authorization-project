@@ -1,17 +1,25 @@
 import scss from "./Header.module.scss";
-import brName from "../../../assets/branName.svg";
+import brName from "../../../assets/logo.svg";
 import log_icon from "../../../assets/logout.svg";
-import heart from "../../../assets/heart.svg";
-import member from "../../../assets/member.svg";
+import heart from "../../../assets/Button - Избранное (1).svg";
+import member from "../../../assets/Button - Войти.svg";
+import basket from "../../../assets/Button - Избранное.svg";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 const Header = () => {
   const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState<null | string>(null);
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isAuth");
     navigate("/login");
   };
+
+  useEffect(() => {
+    const auth = localStorage.getItem("isAuth");
+    setIsAuth(auth);
+  }, []);
 
   return (
     <header className={scss.Header}>
@@ -30,10 +38,17 @@ const Header = () => {
                   <img src={heart} alt="" />
                 </li>
                 <li>
-                  <button onClick={logout}>
-                    <img src={log_icon} alt="" />
-                    Выйти
-                  </button>
+                  <img src={basket} alt="" />
+                </li>
+                <li>
+                  {isAuth !== null ? (
+                    <>
+                      <button onClick={logout}>
+                        <img src={log_icon} alt="" />
+                        Выйти
+                      </button>
+                    </>
+                  ) : null}
                 </li>
               </ul>
             </div>

@@ -2,14 +2,15 @@ import { BaseQueryFn, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://brand-store.up.railway.app",
+  baseUrl: "https://online-crud.up.railway.app",
   prepareHeaders: (headers) => {
     headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
+    return headers;
   },
 });
 
 const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
-  const result = baseQuery(args, api, extraOptions);
+  const result = await baseQuery(args, api, extraOptions);
   return result;
 };
 
@@ -18,6 +19,6 @@ export const api = createApi({
   baseQuery: baseQueryExtended,
   refetchOnReconnect: true,
   refetchOnFocus: false,
-  tagTypes: ["link"],
+  tagTypes: ["link", "product"],
   endpoints: () => ({}),
 });
