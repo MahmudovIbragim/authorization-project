@@ -16,7 +16,6 @@ const Home: FC<TypeHome> = () => {
   const { data, isLoading } = useGetProductQuery();
   const [createFavorite] = useCreateFavoriteProductMutation();
   const [favoriteHeart, setFavoriteHeat] = useState<null | number>(null);
-
   console.log(data, "homeData");
 
   useEffect(() => {
