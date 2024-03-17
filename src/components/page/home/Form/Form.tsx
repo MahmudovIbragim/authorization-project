@@ -2,9 +2,15 @@ import { useFormik } from "formik";
 import Button, { ButtonProps } from "../../../ui/customButton/CustomButton";
 import scss from "./Style.module.scss";
 import Input from "../../../ui/customInput/CustomInput";
+import plus_icon from "../../../../assets/ic_baseline-plus.svg";
 import { useCreateProductMutation } from "../../../../redux/api/product/product";
+import { FC } from "react";
 
-const HomeForm = () => {
+interface HomeFormProps {
+  onClose: () => void;
+}
+
+const HomeForm: FC<HomeFormProps> = ({ onClose }) => {
   const [createProduct] = useCreateProductMutation();
   const loginButtonProps: ButtonProps = {
     type: "submit",
@@ -28,6 +34,7 @@ const HomeForm = () => {
         photoUrl: values.photoUrl,
       };
       await createProduct(newData);
+      onClose();
     },
   });
   return (
@@ -35,8 +42,8 @@ const HomeForm = () => {
       <Input
         id="productName"
         type="text"
-        label="Product Name"
-        placeholder="Product Name"
+        label="Название товара"
+        placeholder="Название"
         value={formik.values.productName}
         onChange={formik.handleChange}
         width="300px"
@@ -44,8 +51,8 @@ const HomeForm = () => {
       <Input
         id="price"
         type="text"
-        label="Price"
-        placeholder="Price"
+        label="Цена"
+        placeholder="Цена"
         value={formik.values.price}
         onChange={formik.handleChange}
         width="300px"
@@ -53,8 +60,8 @@ const HomeForm = () => {
       <Input
         id="quantity"
         type="text"
-        label="Quantity"
-        placeholder="Quantity"
+        label="Количество в запасе"
+        placeholder="Количество"
         value={formik.values.quantity}
         onChange={formik.handleChange}
         width="300px"
@@ -62,13 +69,20 @@ const HomeForm = () => {
       <Input
         id="photoUrl"
         type="text"
-        label="IMG"
-        placeholder="IMG"
+        label="Изображение "
+        placeholder="Изображение"
         value={formik.values.photoUrl}
         onChange={formik.handleChange}
         width="300px"
       />
-      <Button {...loginButtonProps}>Добавить</Button>
+      <p>
+        <img src={plus_icon} /> Добавить следующий <br />
+        цвет
+      </p>
+      <div className={scss.btn}>
+        <button onClick={onClose}>Отменить</button>
+        <Button {...loginButtonProps}>Добавить</Button>
+      </div>
     </form>
   );
 };

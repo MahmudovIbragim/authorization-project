@@ -8,6 +8,7 @@ import heartbg from "../../../assets/heart_bg.svg";
 import { useGetProductQuery } from "../../../redux/api/product/product";
 import { useCreateFavoriteProductMutation } from "../../../redux/api/favoriteProduct/FavoriteProduct";
 
+
 interface TypeHome {}
 
 const Home: FC<TypeHome> = () => {
@@ -16,7 +17,6 @@ const Home: FC<TypeHome> = () => {
   const { data, isLoading } = useGetProductQuery();
   const [createFavorite] = useCreateFavoriteProductMutation();
   const [favoriteHeart, setFavoriteHeat] = useState<null | number>(null);
-  console.log(data, "homeData");
 
   useEffect(() => {
     const isAuth = localStorage.getItem("isAuth");
@@ -25,9 +25,7 @@ const Home: FC<TypeHome> = () => {
     }
   }, [navigate]);
 
-  const handleModal = () => {
-    setIsOpen(!isOpen);
-  };
+
   console.log(isLoading, "isloading");
 
   const hadnleAddTohhleFavorite = async (id: number) => {
@@ -79,13 +77,17 @@ const Home: FC<TypeHome> = () => {
               </div>
             ))}
           </div>
-          <Modal isOpen={isOpen} onClose={handleModal}>
+          <Modal isOpen={isOpen} onClose={() => {
+            setIsOpen(false)
+          }}>
             <div className={scss.modalContent}>
               <div className={scss.modal_navBar}>
-                <p>Добавить новую позицию</p>
+                <p>Добавить новую <br />позицию</p>
               </div>
               <div className={scss.froms}>
-                <HomeForm />
+                <HomeForm onClose={() => {
+                  setIsOpen(false)
+                }}/>
               </div>
             </div>
           </Modal>

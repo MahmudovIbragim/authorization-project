@@ -11,12 +11,13 @@
   .modal {
     display: flex;
     justify-content: center;
-    max-width: 500px;
-    min-height: 500px;
+    max-width: 700px;
+    min-height: 600px;
     width: 100%;
     background-color: #f3f3f7;
     padding: 20px;
     border-radius: 5px;
+    
   }
 }
 .closeBtn {
@@ -32,7 +33,7 @@
     border-radius: 50%;
     position: absolute;
     top: -10px;
-    left: 370px;
+    left: 665px;
     img {
       width: 15px;
     }

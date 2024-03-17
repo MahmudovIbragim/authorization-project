@@ -1,9 +1,8 @@
 import scss from "./Header.module.scss";
 import brName from "../../../assets/logo.svg";
-import log_icon from "../../../assets/logout.svg";
-import heart from "../../../assets/Button - Избранное (1).svg";
-import member from "../../../assets/Button - Войти.svg";
-import basket from "../../../assets/Button - Избранное.svg";
+import heart from "../../../assets/Vector (6).svg";
+import member from "../../../assets/member.svg";
+import basket from "../../../assets/Group.svg";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 const Header = () => {
@@ -32,23 +31,31 @@ const Header = () => {
             <div className={scss.right}>
               <ul>
                 <li>
-                  <img src={member} alt="" />
+                  {isAuth !== null ? (
+                    <>
+                      <img src={member} onClick={logout} alt="" />
+                      Выйти
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={member}
+                        onClick={() => {
+                          navigate("/register");
+                        }}
+                        alt=""
+                      />
+                      Войти
+                    </>
+                  )}
                 </li>
                 <li>
                   <img src={heart} alt="" />
+                  Избранные
                 </li>
                 <li>
                   <img src={basket} alt="" />
-                </li>
-                <li>
-                  {isAuth !== null ? (
-                    <>
-                      <button onClick={logout}>
-                        <img src={log_icon} alt="" />
-                        Выйти
-                      </button>
-                    </>
-                  ) : null}
+                  Корзина
                 </li>
               </ul>
             </div>

@@ -15,14 +15,16 @@
       label {
         display: flex;
         flex-direction: column;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         position: relative;
         margin-bottom: 20px;
       }
       input {
         margin-top: 10px;
-        font-size: 14px;
+        font-size: 16px;
+        font-weight: 400;
+        border-radius: 4px;
         padding: 12px 16px;
         box-sizing: border-box;
         max-width: 408px;
@@ -46,11 +48,12 @@
         font-size: 20px;
         font-weight: 400;
         border-radius: 4px;
-        margin-top: 36px;
+        margin-top: 24px;
         width: 100% !important;
         color: white;
         background-color: black !important;
         padding: 10px 0px;
+        margin-bottom: 14px;
       }
     }
   }

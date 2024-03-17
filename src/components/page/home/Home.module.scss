@@ -1,5 +1,6 @@
 .HomePage {
   margin-bottom: auto;
+  height: 100vh;
   .Content {
     .add_btn {
       display: flex;
@@ -93,8 +94,24 @@
         }
       }
     }
-    .modalContent {
-      margin: 20px;
+  }
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  .modal_navBar {
+    display: flex;
+    justify-content: center;
+    max-width: 380px;
+    p {
+      font-size: 18px;
+      font-weight: 700;
     }
+  }
+  .froms{
+    display: flex;
+    justify-content: center;
   }
 }
