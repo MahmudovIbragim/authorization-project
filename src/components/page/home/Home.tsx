@@ -15,9 +15,7 @@ const Home: FC<TypeHome> = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery();
   const [createFavorite] = useCreateFavoriteProductMutation();
-  const [favoriteHeart, setFavoriteHeat] = useState<null | number>(
-    null
-  );
+  const [favoriteHeart, setFavoriteHeat] = useState<null | number>(null);
 
   console.log(data, "homeData");
 
@@ -42,7 +40,7 @@ const Home: FC<TypeHome> = () => {
       <div className="container">
         <div className={scss.Content}>
           <div className={scss.add_btn}>
-            <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
+            <button onClick={() => setIsOpen(!isOpen)}> Добавить Товар</button>
           </div>
           <div className={scss.rendergin}>
             {data?.map((item) => (
