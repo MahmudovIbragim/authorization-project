@@ -4,16 +4,15 @@ const api = index.injectEndpoints({
   endpoints: (builder) => ({
     getFavoriteProduct: builder.query<GetProductRequest, GetProductResponse>({
       query: () => ({
-        url: "favorite-products/:id",
+        url: "favorites-products",
         method: "GET",
       }),
       providesTags: ["product"],
     }),
     createFavoriteProduct: builder.mutation({
-      query: (body) => ({
-        url: "favorite-products/:id",
+      query: (id) => ({
+        url: `favorites-products/${id}`,
         method: "POST",
-        body: body,
       }),
       invalidatesTags: ["product"],
     }),

@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type GetProductResponse = void;
 type GetProductRequest = {
-  _id: number;
+  product_id: Key | null | undefined;
+  product: any;
+  _id: number ;
   productName: string;
   price: number;
   quantity: number;
@@ -8,7 +11,7 @@ type GetProductRequest = {
 }[];
 
 type PostProductResponse = {
-  _id: number;
+  _id: number ;
   productName: string;
   quantity: number;
   price: number;

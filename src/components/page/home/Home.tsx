@@ -7,7 +7,7 @@ import heart from "../../../assets/heart.svg";
 import heartbg from "../../../assets/heart_bg.svg";
 import { useGetProductQuery } from "../../../redux/api/product/product";
 import { useCreateFavoriteProductMutation } from "../../../redux/api/favoriteProduct/FavoriteProduct";
-
+import { usePostBasketMutation } from "../../../redux/api/basket/basket";
 
 interface TypeHome {}
 
@@ -16,7 +16,9 @@ const Home: FC<TypeHome> = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductQuery();
   const [createFavorite] = useCreateFavoriteProductMutation();
+  const [postBasket] = usePostBasketMutation();
   const [favoriteHeart, setFavoriteHeat] = useState<null | number>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const isAuth = localStorage.getItem("isAuth");
@@ -25,11 +27,16 @@ const Home: FC<TypeHome> = () => {
     }
   }, [navigate]);
 
-
   console.log(isLoading, "isloading");
 
   const hadnleAddTohhleFavorite = async (id: number) => {
     await createFavorite(id);
+    setFavoriteHeat(id);
+    setIsFavorite(true);
+  };
+
+  const handleAddBasket = async (id: number) => {
+    await postBasket(id);
   };
 
   return (
@@ -50,44 +57,55 @@ const Home: FC<TypeHome> = () => {
                     <p className={scss.price}>KGS {item.price}$</p>
                   </div>
                   <div className={scss.favoriteImg}>
-                    {favoriteHeart === item._id ? (
+                    {favoriteHeart === item._id && isFavorite ? (
                       <>
                         <img
-                          src={heart}
+                          src={heartbg}
                           alt=""
-                          onClick={() => setFavoriteHeat(item._id)}
+                          onClick={() => {
+                            setFavoriteHeat(null);
+                            setIsFavorite(false);
+                          }}
                         />
                       </>
                     ) : (
                       <>
                         <img
-                          src={heartbg}
+                          src={heart}
                           alt=""
-                          onClick={() => setFavoriteHeat(item._id)}
+                          onClick={() => hadnleAddTohhleFavorite(item._id)}
                         />
                       </>
                     )}
                   </div>
                 </div>
                 <div className={scss.basketBtn}>
-                  <button onClick={() => hadnleAddTohhleFavorite(item._id)}>
+                  <button onClick={() => handleAddBasket(item._id!)}>
                     Добавить в карзину
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          <Modal isOpen={isOpen} onClose={() => {
-            setIsOpen(false)
-          }}>
+          <Modal
+            isOpen={isOpen}
+            onClose={() => {
+              setIsOpen(false);
+            }}
+          >
             <div className={scss.modalContent}>
               <div className={scss.modal_navBar}>
-                <p>Добавить новую <br />позицию</p>
+                <p>
+                  Добавить новую <br />
+                  позицию
+                </p>
               </div>
               <div className={scss.froms}>
-                <HomeForm onClose={() => {
-                  setIsOpen(false)
-                }}/>
+                <HomeForm
+                  onClose={() => {
+                    setIsOpen(false);
+                  }}
+                />
               </div>
             </div>
           </Modal>

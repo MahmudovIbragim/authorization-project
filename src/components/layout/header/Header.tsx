@@ -8,6 +8,17 @@ import { useEffect, useState } from "react";
 const Header = () => {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState<null | string>(null);
+  const [isNavigate, setIsNavigate] = useState(false);
+
+  const navigatePageFunc = () => {
+    setIsNavigate(!isNavigate);
+    if (isNavigate === false) {
+      navigate("/");
+    } else if (isNavigate === true) {
+      navigate("/favorite");
+    }
+  };
+ 
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -15,10 +26,11 @@ const Header = () => {
     navigate("/login");
   };
 
+  const auth = localStorage.getItem("isAuth");
+
   useEffect(() => {
-    const auth = localStorage.getItem("isAuth");
     setIsAuth(auth);
-  }, []);
+  }, [auth]);
 
   return (
     <header className={scss.Header}>
@@ -50,11 +62,21 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <img src={heart} alt="" />
-                  Избранные
+                  <img
+                    src={heart}
+                    alt=""
+                    onClick={navigatePageFunc}
+                  />
+                  {isNavigate ? <>Избранные</> : <>Вернутся</>}
                 </li>
                 <li>
-                  <img src={basket} alt="" />
+                  <img
+                    src={basket}
+                    alt=""
+                    onClick={() => {
+                      navigate("/basket");
+                    }}
+                  />
                   Корзина
                 </li>
               </ul>

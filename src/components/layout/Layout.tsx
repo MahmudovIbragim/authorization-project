@@ -6,6 +6,8 @@ import Home from "../page/home/Home";
 import Login from "../page/login/Login";
 import Registration from "../page/registration/Registration";
 import NotFound from "../page/notFound/NotFound";
+import Favorite from "../page/favoritePage/Favorite";
+import Basket from "../page/basket/Basket";
 const Layout = () => {
   return (
     <div className={scss.Layout}>
@@ -17,6 +19,8 @@ const Layout = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Registration />} />
+              <Route path="/favorite" element={<Favorite />} />
+              <Route path="/basket" element={<Basket />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

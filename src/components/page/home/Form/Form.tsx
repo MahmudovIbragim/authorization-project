@@ -18,7 +18,6 @@ const HomeForm: FC<HomeFormProps> = ({ onClose }) => {
     color: "blue",
     width: "315px",
   };
-
   const formik = useFormik({
     initialValues: {
       productName: "",
